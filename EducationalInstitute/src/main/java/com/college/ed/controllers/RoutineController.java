@@ -1,5 +1,6 @@
 package com.college.ed.controllers;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,55 +15,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.college.ed.RoutineRequest;
+import com.college.ed.exception_handling.NotFoundException;
+import com.college.ed.exception_handling.ValidationException;
 import com.college.ed.model.Routine;
 import com.college.ed.services.RoutineService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/routine")
 public class RoutineController {
-	
-	@Autowired
-	private RoutineService service;
-	
-	//Retrieval
-	@GetMapping("/routines")
-	public List<Routine> list() {
-		return service.listAll();
-	}
-	
-	//Retrieval By Id
-	@GetMapping("/routines/{id}")
-	public ResponseEntity <Routine> get(@PathVariable Long routineId){
-		try {
-			Routine routine = service.get(routineId);
-			return new ResponseEntity<Routine>(routine,HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<Routine>(HttpStatus.NOT_FOUND);
-		}
-	}
-	
-	//Create operation
-	@PostMapping("/routines")
-	public void add(@RequestBody Routine routine) {
-		service.save(routine);
-	}
-	
-	//Update operation
-	@PutMapping("/routines/{id}")
-	public ResponseEntity <?> update(@RequestBody Routine routine, @PathVariable Long routineId){
-		try {
-			Routine existRoutine = service.get(routineId);
-			service.save(routine);
-			return new ResponseEntity <> (HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity <> (HttpStatus.NOT_FOUND);
-		}
-	}
-	
-	//Delete Operation
-	@DeleteMapping("/routines/{id}")
-	public void delete(@PathVariable Long routineId){
-		service.delete(routineId);
-	}
 
+    @Autowired
+    private RoutineService routineService;
+
+    @PostMapping
+    public ResponseEntity<?> createRoutine(@RequestBody RoutineRequest routineRequest) {
+        try {
+            Long routineId = routineService.saveRoutine(routineRequest);
+            return ResponseEntity.ok(Collections.singletonMap("RoutineID", routineId));
+        } catch (ValidationException | NotFoundException e) {
+            return ResponseEntity.badRequest().body(Collections.singletonMap("error", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.singletonMap("error", "Internal Server Error"));
+        }
+    }
 }

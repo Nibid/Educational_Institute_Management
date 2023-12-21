@@ -18,19 +18,32 @@ public class Routine {
 	private LocalTime endTime;
 	private LocalDate routineDate;
 	
-	//@JsonIgnore
-    //@ManyToOne(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
-    //@JoinColumn(name="teacher_id")
-    //private Teacher teacher;
-	//private Long teacher_id;
+	@JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
+    @JoinColumn(name="teacher_id")
+    private Teacher teacher;
+    
+    public Group getGroup() {
+		return group;
+	}
 
-	//public Teacher getTeacher() {
-	//	return teacher;
-	//}
+	public void setGroup(Group group) {
+		this.group = group;
+	}
 
-	//public void setTeacher(Teacher teacher) {
-	//	this.teacher = teacher;
-	//}
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
+    @JoinColumn(name="group_id")
+    private Group group;
+	private Long teacher_id;
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 
 	public Routine() {
 	}

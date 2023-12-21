@@ -7,15 +7,15 @@ public class RoutineRequest {
     private LocalTime startTime;
     private LocalTime endTime;
     private LocalDate routineDate;
-    private int teacher_id;
-    private int group_id;
+    private Long teacher_id;
+    private Long group_id;
 
     // Default constructor
     public RoutineRequest() {
     }
 
     // Parameterized constructor
-    public RoutineRequest(LocalTime startTime, LocalTime endTime, LocalDate routineDate, int teacher_id, int group_id) {
+    public RoutineRequest(LocalTime startTime, LocalTime endTime, LocalDate routineDate, Long teacher_id, Long group_id) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.routineDate = routineDate;
@@ -49,19 +49,19 @@ public class RoutineRequest {
         this.routineDate = routineDate;
     }
 
-    public int getTeacherID() {
+    public Long getTeacherID() {
         return teacher_id;
     }
 
-    public void setTeacherID(int teacher_id) {
+    public void setTeacherID(Long teacher_id) {
         this.teacher_id = teacher_id;
     }
 
-    public int getGroupID() {
+    public Long getGroupID() {
         return group_id;
     }
 
-    public void setGroupID(int group_id) {
+    public void setGroupID(Long group_id) {
         this.group_id = group_id;
     }
 }

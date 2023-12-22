@@ -3,39 +3,36 @@ package com.college.ed.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="routines")
+@Table(name="\"routine\"")
 public class Routine {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long routineId;
+	private Long id;
 	
 	private LocalTime startTime;
 	private LocalTime endTime;
 	private LocalDate routineDate;
 	
-	@JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="teacher_id")
     private Teacher teacher;
-    
-    public Group getGroup() {
+
+	@ManyToOne
+    @JoinColumn(name="group_id")
+    private Group group;
+	
+	public Group getGroup() {
 		return group;
 	}
 
 	public void setGroup(Group group) {
 		this.group = group;
 	}
-
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
-    @JoinColumn(name="group_id")
-    private Group group;
-	private Long teacher_id;
+	
 
 	public Teacher getTeacher() {
 		return teacher;
@@ -48,13 +45,12 @@ public class Routine {
 	public Routine() {
 	}
 
-	@Id
 	public Long getRoutineId() {
-		return routineId;
+		return id;
 	}
 
-	public void setRoutineId(Long routineId) {
-		this.routineId = routineId;
+	public void setRoutineId(Long id) {
+		this.id = id;
 	}
 
 	public LocalTime getStartTime() {
@@ -81,22 +77,14 @@ public class Routine {
 		this.routineDate = routineDate;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Routine [routineId=" + routineId + ", startTime=" + startTime + ", endTime=" + endTime
-				+ ", routineDate=" + routineDate + ", getRoutineId()="
-				+ getRoutineId() + ", getStartTime()=" + getStartTime() + ", getEndTime()=" + getEndTime()
-				+ ", getRoutineDate()=" + getRoutineDate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+		return "Routine [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", routineDate="
+				+ routineDate + ", teacher=" + teacher + ", group=" + group + ", getGroup()=" + getGroup()
+				+ ", getTeacher()=" + getTeacher() + ", getRoutineId()=" + getRoutineId() + ", getStartTime()="
+				+ getStartTime() + ", getEndTime()=" + getEndTime() + ", getRoutineDate()=" + getRoutineDate()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
-
-	//public Long getTeacher_id() {
-	//	return teacher_id;
-	//}
-
-	//public void setTeacher_id(Long teacher_id) {
-	//	this.teacher_id = teacher_id;
-	//} 
 		
 	}

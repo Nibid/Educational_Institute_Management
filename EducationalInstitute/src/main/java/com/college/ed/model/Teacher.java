@@ -8,51 +8,53 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="teachers")
+@Table(name="\"teacher\"")
 public class Teacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long teacher_id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name="teacherName")
-	private String teacherName;
-	
-	//@JsonIgnore
-	//@OneToMany(cascade = CascadeType.ALL, fetch =FetchType.EAGER, mappedBy="teacher")
-	//private List<Routine> routines;
+    @Column(name="firstName", columnDefinition = "VARCHAR(255)")
+	private String firstName;
     
-    //public List<Routine> getRoutines() {
-	//	return routines;
-	//}
-
-	//public void setRoutines(List<Routine> routines) {
-	//	this.routines = routines;
-	//}
-
+    @Column(name="lastName", columnDefinition = "VARCHAR(255)")
+	private String lastName;
+	
+	@OneToMany(fetch =FetchType.LAZY, mappedBy="teacher")
+	private List<Routine> routine;
+    
 	public Long getTeacherid() {
-		return teacher_id;
+		return id;
 	}
 
-	public void setTeacherid(Long teacher_id) {
-		this.teacher_id = teacher_id;
+	public void setTeacherid(Long id) {
+		this.id = id;
 	}
 
 	public Teacher() {
 	}
 
 
-	public String getTeacherName() {
-		return teacherName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setTeacherName(String teacherName) {
-		this.teacherName = teacherName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	@Override
 	public String toString() {
-		return "Teacher [teacher_id=" + teacher_id + ", groupName=" + teacherName + ", getTeacherid()=" + getTeacherid()
-				+ ", getTeacherName()=" + getTeacherName() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+		return "Teacher [id=" + id + ", groupName=" + firstName + ", getTeacherid()=" + getTeacherid()
+				+ ", getTeacherName()=" + getFirstName() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
 	}
 	

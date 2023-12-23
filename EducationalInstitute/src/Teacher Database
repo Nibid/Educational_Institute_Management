@@ -1,0 +1,10 @@
+INSERT INTO `educational_institute`.`teacher` (`id`, `teacher_name`) VALUES ('1', 'luffy');
+INSERT INTO `educational_institute`.`teacher` (`id`, `teacher_name`) VALUES ('2', 'zoro');
+INSERT INTO `educational_institute`.`teacher` (`id`, `teacher_name`) VALUES ('3', 'nami');
+INSERT INTO `educational_institute`.`teacher` (`id`, `teacher_name`) VALUES ('4', 'ussop');
+INSERT INTO `educational_institute`.`teacher` (`id`, `teacher_name`) VALUES ('5', 'sanji');
+INSERT INTO `educational_institute`.`teacher` (`id`, `teacher_name`) VALUES ('6', 'chopper');
+INSERT INTO `educational_institute`.`teacher` (`id`, `teacher_name`) VALUES ('7', 'robin');
+INSERT INTO `educational_institute`.`teacher` (`id`, `teacher_name`) VALUES ('8', 'franky');
+INSERT INTO `educational_institute`.`teacher` (`id`, `teacher_name`) VALUES ('9', 'brook');
+INSERT INTO `educational_institute`.`teacher` (`id`, `teacher_name`) VALUES ('10', 'jinbe');

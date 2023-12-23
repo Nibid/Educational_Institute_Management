@@ -1,0 +1,5 @@
+INSERT INTO `educational_institute`.`group` (`id`, `group_name`) VALUES ('1', 'koshi');
+INSERT INTO `educational_institute`.`group` (`id`, `group_name`) VALUES ('2', 'mechi');
+INSERT INTO `educational_institute`.`group` (`id`, `group_name`) VALUES ('3', 'sagarmatha');
+INSERT INTO `educational_institute`.`group` (`id`, `group_name`) VALUES ('4', 'bagmati');
+INSERT INTO `educational_institute`.`group` (`id`, `group_name`) VALUES ('5', 'lumbini');

@@ -23,7 +23,7 @@ public class GroupWorkLoadService {
     @Autowired
     private GroupRepository groupRepository;
 
-    public double calculateTotalWorkHours(Long groupId) {
+    public double calculateTotalWorkHours(int groupId) {
         validateGroupId(groupId);
 
         // Retrieve routines for group
@@ -35,11 +35,7 @@ public class GroupWorkLoadService {
         return totalWorkHours;
     }
 
-    private void validateGroupId(Long groupId) {
-        // Validate group ID
-        if (groupId == null) {
-            throw new ValidationException("Invalid group ID");
-        }
+    private void validateGroupId(int groupId) {
 
         // Check if the referenced Group exists
         Optional<Group> optionalGroup = groupRepository.findById(groupId);

@@ -2,59 +2,48 @@ package com.college.ed.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 import jakarta.persistence.*;
 
+//Creating teacher entity
 @Entity
 @Table(name="\"teacher\"")
 public class Teacher {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @Column(name="firstName", columnDefinition = "VARCHAR(255)")
-	private String firstName;
-    
-    @Column(name="lastName", columnDefinition = "VARCHAR(255)")
-	private String lastName;
-	
+    @Column(name="teacherName", columnDefinition = "VARCHAR(255)")
+	private String teacherName;
+
+    // One To Many relationship with routine entity
 	@OneToMany(fetch =FetchType.LAZY, mappedBy="teacher")
 	private List<Routine> routine;
-    
-	public Long getTeacherid() {
-		return id;
-	}
 
-	public void setTeacherid(Long id) {
-		this.id = id;
-	}
-
+	// Default Constructors
 	public Teacher() {
 	}
 
-
-	public String getFirstName() {
-		return firstName;
+	// Getters and Setters
+	public int getTeacherid() {
+		return id;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setTeacherid(int i) {
+		this.id = i;
+	}
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
 	}
 	
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
+	//String toString
 	@Override
 	public String toString() {
-		return "Teacher [id=" + id + ", groupName=" + firstName + ", getTeacherid()=" + getTeacherid()
-				+ ", getTeacherName()=" + getFirstName() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+		return "Teacher [id=" + id + ", groupName=" + teacherName + ", getTeacherid()=" + getTeacherid()
+				+ ", getTeacherName()=" + getTeacherName() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
 	}
 	

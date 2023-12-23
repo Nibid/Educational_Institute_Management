@@ -1,11 +1,7 @@
 package com.college.ed.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.college.ed.RoutineRequest;
 import com.college.ed.exception_handling.NotFoundException;
 import com.college.ed.exception_handling.ValidationException;
@@ -28,30 +24,22 @@ public class RoutineService {
     @Autowired
     private GroupRepository groupRepository;
 
-    public Long saveRoutine(RoutineRequest routineRequest) {
+    public int saveRoutine(RoutineRequest routineRequest) {
         validateAndConvertRequest(routineRequest);
 
-        // Now, you can create and save the Routine entity
+        // Create and save the Routine entity
         Routine routine = convertRequestToEntity(routineRequest);
         routineRepository.save(routine);
 
-        return routine.getRoutineId();
+        return routine.getRoutineId(); 
     }
 
     private void validateAndConvertRequest(RoutineRequest routineRequest) {
-        // Validate Request fields (you can add more validation as needed)
+         //Validate Request fields
         if (routineRequest.getStartTime() == null || routineRequest.getEndTime() == null ||
-            routineRequest.getRoutineDate() == null || routineRequest.getTeacherID() == null ||
-            routineRequest.getGroupID() == null) {
+            routineRequest.getRoutineDate() == null) {
             throw new ValidationException("Invalid routine data");
         }
-
-        // Check if the referenced Teacher and Group exist
-        Teacher teacher = teacherRepository.findById(routineRequest.getTeacherID())
-                .orElseThrow(() -> new NotFoundException("Teacher not found"));
-
-        Group group = groupRepository.findById(routineRequest.getGroupID())
-                .orElseThrow(() -> new NotFoundException("Group not found"));
     }
 
     private Routine convertRequestToEntity(RoutineRequest routineRequest) {
@@ -61,11 +49,11 @@ public class RoutineService {
         routine.setRoutineDate(routineRequest.getRoutineDate());
 
         // Set the referenced Teacher and Group
-        Teacher teacher = teacherRepository.findById(routineRequest.getTeacherID())
+        Teacher teacher = teacherRepository.findById(routineRequest.getTeacher_id())
                 .orElseThrow(() -> new NotFoundException("Teacher not found"));
         routine.setTeacher(teacher);
 
-        Group group = groupRepository.findById(routineRequest.getGroupID())
+        Group group = groupRepository.findById(routineRequest.getGroup_id())
                 .orElseThrow(() -> new NotFoundException("Group not found"));
         routine.setGroup(group);
 

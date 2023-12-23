@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.college.ed.exception_handling.NotFoundException;
 import com.college.ed.exception_handling.ValidationException;
 import com.college.ed.model.Routine;
@@ -30,8 +28,8 @@ public class TeacherWorkLoadService {
 
     	validateInput(startDate, endDate, teacherName);
     	
-        // Find the teacher by name
-        Teacher teacher = teacherRepository.findByFirstName(teacherName);
+        // Finding teacher by name
+        Teacher teacher = teacherRepository.findByTeacherName(teacherName);
         if (teacher == null) {
             throw new NotFoundException("Teacher not found");
         }
